@@ -1,30 +1,32 @@
 niche-privee-shopify/
-├── README.md
+├── README.md                          ← Documentation
+├── .gitignore                         ← Fichiers à ignorer
 ├── theme/
-│   ├── config.json
-│   ├── settings_schema.json
-│   ├── templates/
-│   │   ├── index.liquid
-│   │   ├── product.liquid
-│   │   ├── collection.liquid
-│   │   ├── cart.liquid
-│   │   └── page.liquid
+│   ├── config.json                   ← Configuration du thème
+│   ├── settings_schema.json           ← Paramètres du thème
 │   ├── layout/
-│   │   └── theme.liquid
+│   │   └── theme.liquid              ← Layout principal
+│   ├── templates/
+│   │   ├── index.liquid              ← Page d'accueil
+│   │   ├── product.liquid            ← Page produit
+│   │   ├── collection.liquid         ← Page collection
+│   │   ├── cart.liquid               ← Panier
+│   │   └── page.liquid               ← Pages générales
 │   ├── sections/
-│   │   ├── header.liquid
-│   │   ├── footer.liquid
-│   │   ├── featured-collection.liquid
-│   │   └── hero-banner.liquid
-│   ├── assets/
-│   │   ├── theme.css
-│   │   ├── theme.js
-│   │   └── logo.png
+│   │   ├── header.liquid             ← En-tête
+│   │   ├── footer.liquid             ← Pied de page
+│   │   ├── hero-banner.liquid        ← Bannière héros
+│   │   └── featured-products.liquid  ← Produits en avant
 │   ├── snippets/
-│   │   ├── product-card.liquid
-│   │   ├── navigation.liquid
-│   │   └── cart-icon.liquid
+│   │   ├── product-card.liquid       ← Carte produit
+│   │   ├── navigation.liquid         ← Navigation
+│   │   └── price.liquid              ← Affichage prix
+│   ├── assets/
+│   │   ├── theme.css                 ← Styles (noir, blanc, or)
+│   │   ├── theme.js                  ← Scripts
+│   │   └── icons.svg                 ← Icônes
 │   └── locales/
-│       └── fr.json
-├── .gitignore
-└── package.json
+│       └── fr.json                   ← Traductions FR
+└── docs/
+    └── INSTALLATION.md               ← Guide d'installation
+
