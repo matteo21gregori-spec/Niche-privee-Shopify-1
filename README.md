@@ -1,5 +1,3 @@
-# Niche-privee-Shopify-1
-Luxury Parfumerie Shopify Theme - Black &amp; White with Gold Accents
 niche-privee-shopify/
 ├── README.md
 ├── theme/
