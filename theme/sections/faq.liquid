@@ -1,0 +1,169 @@
+<section class="faq">
+  <div class="faq-container">
+    <h2>{{ section.settings.title }}</h2>
+    <p class="faq-subtitle">{{ section.settings.subtitle }}</p>
+    
+    <div class="faq-items">
+      {% for i in (1..6) %}
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>{{ section.settings.question_text | default: "What makes our fragrances unique?" }}</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>{{ section.settings.answer_text | default: "Our fragrances are crafted with the finest ingredients from around the world, ensuring unparalleled quality and longevity." }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+  
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .faq-container h2 {
+    font-size: 36px;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .faq-subtitle {
+    text-align: center;
+    color: var(--color-secondary);
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  
+  .faq-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .faq-item {
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .faq-item:hover {
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
+  }
+  
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+  }
+  
+  .faq-question:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .faq-question h3 {
+    font-size: 16px;
+    color: var(--color-secondary);
+    margin: 0;
+    flex: 1;
+  }
+  
+  .faq-toggle {
+    font-size: 24px;
+    color: var(--color-primary);
+    font-weight: bold;
+    transition: transform 0.3s;
+  }
+  
+  .faq-item.active .faq-toggle {
+    transform: rotate(45deg);
+  }
+  
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: white;
+  }
+  
+  .faq-item.active .faq-answer {
+    max-height: 500px;
+  }
+  
+  .faq-answer p {
+    padding: 20px;
+    color: #666;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .faq-container h2 {
+      font-size: 28px;
+    }
+    
+    .faq-question h3 {
+      font-size: 14px;
+    }
+    
+    .faq-toggle {
+      font-size: 20px;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', function() {
+      const faqItem = this.parentElement;
+      faqItem.classList.toggle('active');
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Find answers to your questions about our fragrances"
+    },
+    {
+      "type": "text",
+      "id": "question_text",
+      "label": "Question",
+      "default": "What makes our fragrances unique?"
+    },
+    {
+      "type": "text",
+      "id": "answer_text",
+      "label": "Answer",
+      "default": "Our fragrances are crafted with the finest ingredients from around the world, ensuring unparalleled quality and longevity."
+    }
+  ]
+}
+{% endschema %}
