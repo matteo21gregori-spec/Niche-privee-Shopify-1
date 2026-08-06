@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+.DS_Store
+
+# Build files
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Shopify
+.shopifyrc
+dist/
+secrets.json
+
+# Environment
+.env
+.env.local
+
+# OS
+Thumbs.db
