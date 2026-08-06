@@ -1,0 +1,121 @@
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">{{ section.settings.title }}</h1>
+    <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
+    <a href="{{ section.settings.button_link }}" class="hero-button">{{ section.settings.button_text }}</a>
+  </div>
+  
+  {% if section.settings.image %}
+    <img src="{{ section.settings.image | image_url: width=1200 }}" alt="Hero" class="hero-image">
+  {% endif %}
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-secondary);
+    overflow: hidden;
+  }
+  
+  .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: var(--color-accent);
+    max-width: 600px;
+    padding: 0 20px;
+  }
+  
+  .hero-title {
+    font-size: 48px;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+  }
+  
+  .hero-subtitle {
+    font-size: 20px;
+    color: var(--color-accent);
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+  
+  .hero-button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    padding: 15px 40px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .hero-button:hover {
+    background-color: #b8941f;
+  }
+  
+  @media (max-width: 768px) {
+    .hero {
+      height: 350px;
+    }
+    
+    .hero-title {
+      font-size: 32px;
+    }
+    
+    .hero-subtitle {
+      font-size: 16px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Welcome to Niche Privée"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Discover our exclusive collection of luxury fragrances"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero Image"
+    }
+  ]
+}
+{% endschema %}
