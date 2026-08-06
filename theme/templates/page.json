@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "page": {
+      "type": "page",
+      "settings": {
+        "show_title": true,
+        "show_content": true,
+        "max_width": 1200
+      }
+    }
+  },
+  "order": ["page"]
+}
