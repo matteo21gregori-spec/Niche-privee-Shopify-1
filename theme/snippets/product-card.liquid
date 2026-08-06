@@ -1,0 +1,264 @@
+{%- if product -%}
+  <div class="product-card" data-product-card>
+    <!-- Product Image -->
+    <div class="product-card__image-wrapper">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 500 }}"
+          alt="{{ product.featured_image.alt | escape }}"
+          class="product-card__image"
+          loading="lazy"
+          data-main-image
+        />
+      {%- endif -%}
+
+      <!-- Hover Image (if available) -->
+      {%- if product.images.size > 1 -%}
+        <img
+          src="{{ product.images[1] | image_url: width: 500 }}"
+          alt="{{ product.images[1].alt | escape }}"
+          class="product-card__image product-card__image--hover"
+          loading="lazy"
+        />
+      {%- endif -%}
+
+      <!-- Sale Badge -->
+      {%- if product.compare_at_price > product.price -%}
+        <span class="product-card__badge product-card__badge--sale">
+          Sale
+        </span>
+      {%- endif -%}
+
+      <!-- Quick Add Button -->
+      <button
+        class="product-card__quick-add btn btn-small"
+        data-quick-add
+        aria-label="Quick add {{ product.title }}"
+      >
+        Quick Add
+      </button>
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-card__info">
+      <!-- Product Title -->
+      <h3 class="product-card__title">
+        <a href="{{ product.url }}" class="product-card__link">
+          {{ product.title }}
+        </a>
+      </h3>
+
+      <!-- Product Category/Type -->
+      {%- if product.type -%}
+        <p class="product-card__type">
+          {{ product.type }}
+        </p>
+      {%- endif -%}
+
+      <!-- Star Rating -->
+      {%- if product.metafields.reviews.rating -%}
+        <div class="product-card__rating">
+          {%- for i in (1..5) -%}
+            {%- if i <= product.metafields.reviews.rating.value -%}
+              <span class="star star--filled">★</span>
+            {%- else -%}
+              <span class="star">☆</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <!-- Price -->
+      <div class="product-card__price">
+        {%- if product.compare_at_price > product.price -%}
+          <span class="product-card__price--original">
+            {{ product.compare_at_price | money }}
+          </span>
+        {%- endif -%}
+        <span class="product-card__price--current" data-price>
+          {{ product.price | money }}
+        </span>
+      </div>
+
+      <!-- Quick View Link -->
+      <a href="{{ product.url }}" class="product-card__quick-view">
+        View Details →
+      </a>
+    </div>
+  </div>
+
+  <style>
+    .product-card {
+      background-color: white;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      border-color: var(--color-primary);
+    }
+
+    .product-card__image-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      aspect-ratio: 1;
+      background-color: var(--color-background);
+    }
+
+    .product-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .product-card__image--hover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .product-card__image--hover {
+      opacity: 1;
+    }
+
+    .product-card__badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background-color: var(--color-primary);
+      color: var(--color-secondary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 2;
+    }
+
+    .product-card__badge--sale {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .product-card__quick-add {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: var(--transition);
+      z-index: 3;
+    }
+
+    .product-card:hover .product-card__quick-add {
+      opacity: 1;
+    }
+
+    .product-card__info {
+      padding: 16px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card__title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .product-card__link {
+      color: var(--color-secondary);
+      transition: var(--transition);
+    }
+
+    .product-card__link:hover {
+      color: var(--color-primary);
+    }
+
+    .product-card__type {
+      font-size: 12px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .product-card__rating {
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .star {
+      color: var(--color-primary);
+      margin-right: 2px;
+    }
+
+    .star--filled {
+      color: var(--color-primary);
+    }
+
+    .product-card__price {
+      margin-bottom: 12px;
+      margin-top: auto;
+    }
+
+    .product-card__price--original {
+      display: inline-block;
+      text-decoration: line-through;
+      color: #999;
+      font-size: 13px;
+      margin-right: 8px;
+    }
+
+    .product-card__price--current {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-secondary);
+    }
+
+    .product-card__quick-view {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .product-card__quick-view:hover {
+      color: var(--color-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .product-card__title {
+        font-size: 14px;
+      }
+
+      .product-card__price--current {
+        font-size: 16px;
+      }
+
+      .product-card:hover .product-card__quick-add {
+        opacity: 0;
+      }
+
+      .product-card__quick-add {
+        opacity: 1;
+      }
+    }
+  </style>
+{%- endif -%}
