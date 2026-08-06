@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Color (Gold)",
+        "default": "#d4af37"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary Color (Black)",
+        "default": "#0a0a0a"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color (White)",
+        "default": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "playfair_display_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "montserrat_n4"
+      }
+    ]
+  }
+]
