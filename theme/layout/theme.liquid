@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }}</title>
+  
+  {{ content_for_header }}
+  
+  <style>
+    :root {
+      --color-primary: #d4af37;
+      --color-secondary: #0a0a0a;
+      --color-accent: #f5f5f5;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Montserrat', sans-serif;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      color: var(--color-secondary);
+      background-color: var(--color-accent);
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      color: var(--color-primary);
+    }
+  </style>
+</head>
+<body>
+  
+  {% section 'header' %}
+  
+  <main>
+    {{ content_for_layout }}
+  </main>
+  
+  {% section 'footer' %}
+  
+  {{ content_for_footer }}
+  
+</body>
+</html>
