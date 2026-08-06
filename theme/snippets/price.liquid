@@ -1,0 +1,121 @@
+{%- comment -%}
+  Price Snippet - Displays product pricing with compare price option
+  
+  Usage:
+  {% include 'price', product: product, variant: variant %}
+{%- endcomment -%}
+
+{%- if product -%}
+  <div class="price-wrapper" data-price-wrapper>
+    {%- if variant -%}
+      {%- assign current_price = variant.price -%}
+      {%- assign compare_price = variant.compare_at_price -%}
+    {%- else -%}
+      {%- assign current_price = product.price -%}
+      {%- assign compare_price = product.compare_at_price -%}
+    {%- endif -%}
+
+    <div class="price-container">
+      {%- if compare_price and compare_price > current_price -%}
+        <!-- Compare Price (Original Price) -->
+        <span class="price price--compare" data-compare-price>
+          {{ compare_price | money }}
+        </span>
+
+        <!-- Discount Percentage Badge -->
+        {%- assign discount = compare_price | minus: current_price -%}
+        {%- assign discount_percent = discount | times: 100 | divided_by: compare_price | round -%}
+        <span class="price-discount-badge">
+          Save {{ discount_percent }}%
+        </span>
+      {%- endif -%}
+
+      <!-- Current Price -->
+      <span class="price price--current" data-price>
+        {{ current_price | money }}
+      </span>
+    </div>
+
+    <!-- Price Info Text -->
+    {%- if product.metafields.custom.price_info -%}
+      <p class="price-info">
+        {{ product.metafields.custom.price_info }}
+      </p>
+    {%- endif -%}
+
+    <!-- Tax Info -->
+    {%- if shop.taxes_included -%}
+      <p class="price-tax-info">
+        Tax included
+      </p>
+    {%- else -%}
+      <p class="price-tax-info">
+        Tax calculated at checkout
+      </p>
+    {%- endif -%}
+  </div>
+
+  <style>
+    .price-wrapper {
+      margin-bottom: 16px;
+    }
+
+    .price-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .price--current {
+      font-size: 28px;
+      color: var(--color-secondary);
+    }
+
+    .price--compare {
+      font-size: 16px;
+      color: #999;
+      text-decoration: line-through;
+    }
+
+    .price-discount-badge {
+      background-color: #e74c3c;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .price-info {
+      font-size: 13px;
+      color: #666;
+      margin: 8px 0 0 0;
+      font-style: italic;
+    }
+
+    .price-tax-info {
+      font-size: 12px;
+      color: #999;
+      margin: 4px 0 0 0;
+    }
+
+    @media (max-width: 768px) {
+      .price--current {
+        font-size: 24px;
+      }
+
+      .price--compare {
+        font-size: 14px;
+      }
+    }
+  </style>
+{%- endif -%}
