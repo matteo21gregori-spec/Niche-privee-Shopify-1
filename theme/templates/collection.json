@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "collection": {
+      "type": "collection",
+      "settings": {
+        "show_filters": true,
+        "show_sort": true,
+        "products_per_page": 12,
+        "image_ratio": "square"
+      }
+    }
+  },
+  "order": ["collection"]
+}
