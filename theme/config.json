@@ -1,0 +1,12 @@
+{
+  "name": "Niche Privée - Haute Parfumerie",
+  "id": 123456789,
+  "role": "development",
+  "development": {
+    "extensions": []
+  },
+  "theme": {
+    "name": "Niche Privée",
+    "id": 123456789
+  }
+}
