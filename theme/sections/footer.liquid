@@ -1,0 +1,100 @@
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>About Niche Privée</h3>
+      <p>Luxury fragrances for the discerning connoisseur.</p>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="/pages/about">About Us</a></li>
+        <li><a href="/pages/shipping">Shipping</a></li>
+        <li><a href="/pages/returns">Returns</a></li>
+        <li><a href="/pages/contact">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <p>Email: {{ shop.email }}</p>
+      <p>Phone: {{ shop.phone }}</p>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Follow Us</h3>
+      <div class="social-links">
+        <a href="#" class="social">Instagram</a>
+        <a href="#" class="social">Facebook</a>
+        <a href="#" class="social">Twitter</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2024 {{ shop.name }}. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-secondary);
+    color: var(--color-accent);
+    padding: 40px 0 20px;
+    border-top: 2px solid var(--color-primary);
+    margin-top: 60px;
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    gap: 30px;
+  }
+  
+  .footer-section h3 {
+    color: var(--color-primary);
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  .footer-section p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+  }
+  
+  .footer-section a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+  }
+  
+  .footer-section a:hover {
+    color: var(--color-primary);
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-primary);
+    font-size: 12px;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
