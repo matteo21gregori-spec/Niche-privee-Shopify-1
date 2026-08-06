@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "product": {
+      "type": "product",
+      "settings": {
+        "show_quantity": true,
+        "show_reviews": true,
+        "show_variant_selector": true,
+        "show_description": true
+      }
+    }
+  },
+  "order": ["product"]
+}
