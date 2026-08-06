@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "cart": {
+      "type": "cart",
+      "settings": {
+        "show_continue_shopping": true,
+        "show_cart_totals": true,
+        "show_shipping_estimate": true,
+        "button_text": "Checkout"
+      }
+    }
+  },
+  "order": ["cart"]
+}
