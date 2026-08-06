@@ -1,0 +1,164 @@
+<section class="product-section">
+  <div class="product-container">
+    <div class="product-image">
+      {% if product.featured_image %}
+        <img src="{{ product.featured_image | image_url: width=500 }}" alt="{{ product.title }}">
+      {% endif %}
+    </div>
+    
+    <div class="product-info">
+      <h1 class="product-title">{{ product.title }}</h1>
+      
+      <div class="product-price">
+        <span class="price">{{ product.price | money }}</span>
+        {% if product.compare_at_price %}
+          <span class="compare-price">{{ product.compare_at_price | money }}</span>
+        {% endif %}
+      </div>
+      
+      <p class="product-description">{{ product.description }}</p>
+      
+      <form method="post" action="/cart/add" class="product-form">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        
+        <div class="variant-selector">
+          {% if product.options.size > 0 %}
+            {% for option in product.options %}
+              <label for="option-{{ forloop.index }}">{{ option }}:</label>
+              <select name="options[{{ option }}]" id="option-{{ forloop.index }}">
+                {% for value in product.options_with_values[forloop.index0].values %}
+                  <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+              </select>
+            {% endfor %}
+          {% endif %}
+        </div>
+        
+        <div class="quantity-selector">
+          <label for="quantity">Quantity:</label>
+          <input type="number" name="quantity" id="quantity" value="1" min="1">
+        </div>
+        
+        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+      </form>
+      
+      <div class="product-details">
+        <h3>Product Details</h3>
+        <ul>
+          <li><strong>SKU:</strong> {{ product.sku }}</li>
+          <li><strong>Availability:</strong> {% if product.available %}In Stock{% else %}Out of Stock{% endif %}</li>
+          <li><strong>Collections:</strong> {% for collection in product.collections %}{{ collection.title }}{% unless forloop.last %}, {% endunless %}{% endfor %}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .product-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  
+  .product-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  
+  .product-image img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--color-primary);
+  }
+  
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .product-title {
+    font-size: 32px;
+    color: var(--color-primary);
+  }
+  
+  .product-price {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .price {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-secondary);
+  }
+  
+  .compare-price {
+    font-size: 16px;
+    text-decoration: line-through;
+    color: #999;
+  }
+  
+  .product-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-secondary);
+  }
+  
+  .variant-selector,
+  .quantity-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .variant-selector select,
+  .quantity-selector input {
+    padding: 10px;
+    border: 1px solid var(--color-primary);
+    font-size: 14px;
+  }
+  
+  .add-to-cart-btn {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: #b8941f;
+  }
+  
+  .product-details {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid var(--color-primary);
+  }
+  
+  .product-details h3 {
+    margin-bottom: 15px;
+  }
+  
+  .product-details ul {
+    list-style: none;
+  }
+  
+  .product-details li {
+    padding: 8px 0;
+    font-size: 14px;
+  }
+  
+  @media (max-width: 768px) {
+    .product-container {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
