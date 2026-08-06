@@ -1,0 +1,183 @@
+<section class="featured-products">
+  <div class="featured-header">
+    <h2>{{ section.settings.title }}</h2>
+    <p>{{ section.settings.subtitle }}</p>
+  </div>
+  
+  <div class="featured-grid">
+    {% for product in section.settings.products %}
+      <div class="featured-card">
+        <div class="featured-image">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | image_url: width=300 }}" alt="{{ product.title }}">
+          {% endif %}
+          <div class="featured-overlay">
+            <a href="{{ product.url }}" class="featured-link">View Details</a>
+          </div>
+        </div>
+        
+        <div class="featured-info">
+          <h3>{{ product.title }}</h3>
+          <p class="featured-price">{{ product.price | money }}</p>
+          {% if product.description %}
+            <p class="featured-desc">{{ product.description | strip_html | truncatewords: 15 }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<style>
+  .featured-products {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+  
+  .featured-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .featured-header h2 {
+    font-size: 36px;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+  }
+  
+  .featured-header p {
+    font-size: 16px;
+    color: var(--color-secondary);
+  }
+  
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+  
+  .featured-card {
+    background-color: white;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+  }
+  
+  .featured-card:hover {
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+    transform: translateY(-10px);
+  }
+  
+  .featured-image {
+    position: relative;
+    overflow: hidden;
+    height: 350px;
+  }
+  
+  .featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .featured-card:hover .featured-image img {
+    transform: scale(1.1);
+  }
+  
+  .featured-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .featured-card:hover .featured-overlay {
+    opacity: 1;
+  }
+  
+  .featured-link {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .featured-link:hover {
+    background-color: #b8941f;
+  }
+  
+  .featured-info {
+    padding: 20px;
+  }
+  
+  .featured-info h3 {
+    font-size: 18px;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+  }
+  
+  .featured-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--color-secondary);
+    margin-bottom: 10px;
+  }
+  
+  .featured-desc {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  @media (max-width: 768px) {
+    .featured-header h2 {
+      font-size: 28px;
+    }
+    
+    .featured-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    
+    .featured-image {
+      height: 250px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Our Featured Collection"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Curated selections for the connoisseur"
+    },
+    {
+      "type": "product",
+      "id": "products",
+      "label": "Select Products",
+      "limit": 6
+    }
+  ]
+}
+{% endschema %}
