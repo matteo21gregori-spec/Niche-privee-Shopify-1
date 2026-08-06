@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "title": "Haute Parfumerie",
+        "subtitle": "Luxury Fragrances",
+        "image": "https://via.placeholder.com/1200x600",
+        "button_text": "Discover",
+        "button_url": "/collections/all"
+      }
+    }
+  },
+  "order": ["hero"]
+}
